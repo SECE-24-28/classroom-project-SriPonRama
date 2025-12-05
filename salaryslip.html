@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salary Slip Generator</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-xl p-6 rounded-2xl w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center mb-6">Salary Slip Generator</h1>
+
+    <div class="space-y-4">
+      <input id="empName" type="text" placeholder="Employee Name"
+        class="w-full border p-2 rounded focus:outline-none focus:ring" />
+
+      <input id="department" type="text" placeholder="Department"
+        class="w-full border p-2 rounded focus:outline-none focus:ring" />
+
+      <input id="basicSalary" type="number" min="0" placeholder="Basic Salary"
+        class="w-full border p-2 rounded focus:outline-none focus:ring" />
+
+      <button onclick="generateSlip()"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+        Generate Salary Slip
+      </button>
+    </div>
+
+    <div id="result" class="mt-6 hidden bg-gray-50 p-4 rounded-lg border"></div>
+  </div>
+
+  <script>
+    function generateSlip() {
+      const name = document.getElementById('empName').value;
+      const dept = document.getElementById('department').value;
+      const basic = parseFloat(document.getElementById('basicSalary').value);
+
+      if (!name || !dept || !basic) {
+        alert('Please fill all fields correctly!');
+        return;
+      }
+
+      const hra = basic * 0.10;
+      const pf = basic * 0.05;
+      const net = basic + hra - pf;
+
+      const greeting = `Hello, ${name}!`;
+
+      document.getElementById('result').innerHTML = `
+        <p class="font-semibold text-lg mb-2">${greeting}</p>
+        <p><strong>Employee Name:</strong> ${name}</p>
+        <p><strong>Department:</strong> ${dept}</p>
+        <p><strong>Basic Salary:</strong> ₹${basic.toFixed(2)}</p>
+        <p><strong>HRA (10%):</strong> ₹${hra.toFixed(2)}</p>
+        <p><strong>PF (5%):</strong> ₹${pf.toFixed(2)}</p>
+        <hr class="my-2">
+        <p class="font-bold text-lg"><strong>Net Salary:</strong> ₹${net.toFixed(2)}</p>
+      `;
+
+      document.getElementById('result').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
