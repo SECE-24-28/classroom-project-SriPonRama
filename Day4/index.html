@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Recharge App</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="RechargeApp" class="logo-img">
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#" onclick="showSection('dashboard')">Home</a></li>
+                    <li><a href="#" onclick="showSection('recharge')">Recharge</a></li>
+                    <li><a href="#" onclick="showSection('plans')">Plans</a></li>
+                    <li><a href="#" onclick="showSection('transactions')">Transactions</a></li>
+                    <li><a href="#" onclick="showSection('profile')">Profile</a></li>
+                    <li><a href="#" onclick="showSection('about')">About</a></li>
+                    <li><a href="#" onclick="showSection('login')">Login</a></li>
+                </ul>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="dashboard" class="section active">
+        <div class="container">
+            <div class="welcome-banner">
+                <h1>Welcome to Mobile Recharge</h1>
+                <p>Quick, secure, and instant mobile recharges</p>
+                <button class="btn-primary" onclick="showSection('recharge')">Quick Recharge</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Instant Recharge</h3>
+                    <p>Get your mobile recharged instantly with our secure payment system</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multiple Operators</h3>
+                    <p>Support for all major telecom operators across the country</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Best Plans</h3>
+                    <p>Compare and choose from the best available recharge plans</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recharge" class="section">
+        <div class="container">
+            <h2>Mobile Recharge</h2>
+            <div class="recharge-form" id="rechargeFormContainer">
+                <form id="rechargeForm">
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="operator">Select Operator</label>
+                        <select id="operator" name="operator" required>
+                            <option value="">Choose Operator</option>
+                            <option value="airtel">Airtel</option>
+                            <option value="jio">Jio</option>
+                            <option value="vi">Vi (Vodafone Idea)</option>
+                            <option value="bsnl">BSNL</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount">Recharge Amount</label>
+                        <input type="number" id="amount" name="amount" placeholder="Enter amount" min="10" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Recharge Now</button>
+                </form>
+            </div>
+            
+            <div class="login-required" id="rechargeLoginPrompt" style="display: none;">
+                <h3>Login Required</h3>
+                <p>Please login to your account to recharge your mobile</p>
+                <button class="btn-primary" onclick="showSection('login')">Login Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="section">
+        <div class="container">
+            <h2>Recharge Plans</h2>
+            
+            <div class="operator-filter">
+                <button class="filter-btn active" onclick="filterPlans('all')">All</button>
+                <button class="filter-btn" onclick="filterPlans('airtel')">Airtel</button>
+                <button class="filter-btn" onclick="filterPlans('jio')">Jio</button>
+                <button class="filter-btn" onclick="filterPlans('vi')">Vi</button>
+                <button class="filter-btn" onclick="filterPlans('bsnl')">BSNL</button>
+            </div>
+            
+            <div class="plan-categories" id="planCategories" style="display: none;">
+                <button class="category-btn active" onclick="showCategory('recharge')">Recharge</button>
+                <button class="category-btn" onclick="showCategory('topup')">Top-up</button>
+                <button class="category-btn" onclick="showCategory('special')">Special</button>
+            </div>
+            
+            <div class="plans-grid" id="plansGrid">
+                <!-- Airtel Plans -->
+                <div class="plan-card" data-operator="airtel" data-category="recharge">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹199</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="recharge">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹399</div>
+                    <div class="plan-validity">56 Days</div>
+                    <div class="plan-details">
+                        <p>2.5GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="recharge">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹719</div>
+                    <div class="plan-validity">84 Days</div>
+                    <div class="plan-details">
+                        <p>1.5GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="recharge">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹1499</div>
+                    <div class="plan-validity">365 Days</div>
+                    <div class="plan-details">
+                        <p>24GB/Month</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="airtel" data-category="topup">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹48</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>3GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="topup">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹98</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>12GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="topup">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹251</div>
+                    <div class="plan-validity">30 Days</div>
+                    <div class="plan-details">
+                        <p>50GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="airtel" data-category="special">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹95</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>200MB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="special">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹155</div>
+                    <div class="plan-validity">24 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="airtel" data-category="special">
+                    <div class="plan-operator">Airtel</div>
+                    <div class="plan-price">₹179</div>
+                    <div class="plan-validity">26 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <!-- Jio Plans -->
+                <div class="plan-card" data-operator="jio" data-category="recharge">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹209</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="recharge">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹239</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="recharge">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹449</div>
+                    <div class="plan-validity">56 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="recharge">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹2999</div>
+                    <div class="plan-validity">365 Days</div>
+                    <div class="plan-details">
+                        <p>2.5GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="jio" data-category="topup">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹15</div>
+                    <div class="plan-validity">1 Day</div>
+                    <div class="plan-details">
+                        <p>1GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="topup">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹25</div>
+                    <div class="plan-validity">2 Days</div>
+                    <div class="plan-details">
+                        <p>2GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="topup">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹61</div>
+                    <div class="plan-validity">7 Days</div>
+                    <div class="plan-details">
+                        <p>6GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="topup">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹101</div>
+                    <div class="plan-validity">14 Days</div>
+                    <div class="plan-details">
+                        <p>12GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="jio" data-category="special">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹75</div>
+                    <div class="plan-validity">14 Days</div>
+                    <div class="plan-details">
+                        <p>5GB Total</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="special">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹155</div>
+                    <div class="plan-validity">24 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="jio" data-category="special">
+                    <div class="plan-operator">Jio</div>
+                    <div class="plan-price">₹186</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <!-- Vi Plans -->
+                <div class="plan-card" data-operator="vi" data-category="recharge">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹219</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="recharge">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹269</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>1.5GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="recharge">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹479</div>
+                    <div class="plan-validity">56 Days</div>
+                    <div class="plan-details">
+                        <p>1.5GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="recharge">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹1799</div>
+                    <div class="plan-validity">365 Days</div>
+                    <div class="plan-details">
+                        <p>24GB/Month</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="vi" data-category="topup">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹16</div>
+                    <div class="plan-validity">1 Day</div>
+                    <div class="plan-details">
+                        <p>1GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="topup">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹58</div>
+                    <div class="plan-validity">7 Days</div>
+                    <div class="plan-details">
+                        <p>4GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="topup">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹118</div>
+                    <div class="plan-validity">14 Days</div>
+                    <div class="plan-details">
+                        <p>12GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="vi" data-category="special">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹99</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>200MB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="special">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹157</div>
+                    <div class="plan-validity">18 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="vi" data-category="special">
+                    <div class="plan-operator">Vi</div>
+                    <div class="plan-price">₹181</div>
+                    <div class="plan-validity">24 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <!-- BSNL Plans -->
+                <div class="plan-card" data-operator="bsnl" data-category="recharge">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹187</div>
+                    <div class="plan-validity">28 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="recharge">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹319</div>
+                    <div class="plan-validity">54 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="recharge">
+                    <div class="plan-price">₹797</div>
+                    <div class="plan-validity">160 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="recharge">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹1999</div>
+                    <div class="plan-validity">365 Days</div>
+                    <div class="plan-details">
+                        <p>600GB Total</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="bsnl" data-category="topup">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹29</div>
+                    <div class="plan-validity">2 Days</div>
+                    <div class="plan-details">
+                        <p>1GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="topup">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹47</div>
+                    <div class="plan-validity">5 Days</div>
+                    <div class="plan-details">
+                        <p>2GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="topup">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹96</div>
+                    <div class="plan-validity">10 Days</div>
+                    <div class="plan-details">
+                        <p>5GB Data</p>
+                        <p>No Calls</p>
+                        <p>No SMS</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                
+                <div class="plan-card" data-operator="bsnl" data-category="special">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹108</div>
+                    <div class="plan-validity">25 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="special">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹153</div>
+                    <div class="plan-validity">23 Days</div>
+                    <div class="plan-details">
+                        <p>1GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+                <div class="plan-card" data-operator="bsnl" data-category="special">
+                    <div class="plan-operator">BSNL</div>
+                    <div class="plan-price">₹166</div>
+                    <div class="plan-validity">24 Days</div>
+                    <div class="plan-details">
+                        <p>2GB/Day</p>
+                        <p>Unlimited Calls</p>
+                        <p>100 SMS/Day</p>
+                    </div>
+                    <button class="btn-secondary">Recharge</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transactions Section -->
+    <section id="transactions" class="section">
+        <div class="container">
+            <h2>Transaction History</h2>
+            <div class="transactions-container" id="transactionsContainer">
+                <div class="login-required" id="transactionsLoginPrompt">
+                    <h3>Login Required</h3>
+                    <p>Please login to view your transaction history</p>
+                    <button class="btn-primary" onclick="showSection('login')">Login Now</button>
+                </div>
+                
+                <div class="transactions-list" id="transactionsList" style="display: none;">
+                    <div class="print-controls">
+                        <div class="date-filter">
+                            <input type="date" id="startDate" placeholder="Start Date">
+                            <input type="date" id="endDate" placeholder="End Date">
+                            <button class="btn-secondary" onclick="filterTransactions()">Filter</button>
+                            <button class="btn-primary" onclick="printTransactions()">Print</button>
+                            <button class="btn-primary" onclick="downloadTransactions()">Download</button>
+                        </div>
+                    </div>
+                    
+                    <div class="no-transactions" id="noTransactions">
+                        <p>No transactions found. Start recharging to see your history!</p>
+                    </div>
+                    
+                    <div id="transactionsDisplay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="section">
+        <div class="container">
+            <h2>User Profile</h2>
+            <div class="profile-card" id="profileCard">
+                <!-- Profile View Mode -->
+                <div class="profile-info" id="profileView">
+                    <h3 id="profileName">Please login to view profile</h3>
+                    <p id="profilePhone"><strong>Phone:</strong> Not available</p>
+                    <p id="profileEmail"><strong>Email:</strong> Not available</p>
+                    <p id="profileMember"><strong>Member Since:</strong> Not available</p>
+                    <div class="profile-buttons">
+                        <button class="btn-primary" id="editProfileBtn" style="display: none;" onclick="toggleEditMode()">Edit Profile</button>
+                        <button class="btn-secondary" onclick="showSection('login')" id="loginPromptBtn">Login to View Profile</button>
+                        <button class="btn-secondary" id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+                
+                <!-- Profile Edit Mode -->
+                <div class="profile-edit" id="profileEdit" style="display: none;">
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="editName">Full Name</label>
+                            <input type="text" id="editName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhone">Phone Number</label>
+                            <input type="tel" id="editPhone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" id="editEmail" name="email" required>
+                        </div>
+                        <div class="profile-buttons">
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                            <button type="button" class="btn-secondary" onclick="toggleEditMode()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About RechargeApp</h2>
+            <div class="about-content">
+                <p>RechargeApp is your trusted partner for instant mobile recharges. We provide a secure, fast, and reliable platform for all your mobile recharge needs.</p>
+                
+                <h3>Key Features:</h3>
+                <ul>
+                    <li>Instant recharge processing</li>
+                    <li>Support for all major operators</li>
+                    <li>Secure payment gateway</li>
+                    <li>24/7 customer support</li>
+                    <li>Transaction history tracking</li>
+                </ul>
+                
+                <h3>Security:</h3>
+                <p>Your data and transactions are protected with bank-level security. We use SSL encryption and comply with industry standards to ensure your information remains safe.</p>
+                
+                <h3>Services:</h3>
+                <p>We offer mobile recharges, DTH recharges, bill payments, and more. Our platform is designed to make your digital transactions seamless and hassle-free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="section">
+        <div class="container">
+            <div class="auth-form">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+                
+                <p class="auth-link">Don't have an account? <a href="#" onclick="showSection('signup')">Sign up here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="signup" class="section">
+        <div class="container">
+            <div class="auth-form">
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPhone">Phone Number</label>
+                        <input type="tel" id="signupPhone" name="phone" placeholder="Enter 10-digit mobile number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" placeholder="Create a password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                </form>
+                
+                <p class="auth-link">Already have an account? <a href="#" onclick="showSection('login')">Login here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RechargeApp</h3>
+                    <p>&copy; 2024 RechargeApp. All rights reserved.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <div class="quick-links">
+                        <a href="#" onclick="showSection('dashboard')">Home</a>
+                        <a href="#" onclick="showSection('recharge')">Recharge</a>
+                        <a href="#" onclick="showSection('plans')">Plans</a>
+                        <a href="#" onclick="showSection('about')">About</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <img src="images/wats.png" alt="WhatsApp" class="social-icon">
+                        <img src="images/insta.png" alt="Instagram" class="social-icon">
+                        <img src="images/tei.png" alt="Twitter" class="social-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="api-client.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
